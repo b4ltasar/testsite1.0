@@ -32,6 +32,28 @@ title: NEARWEEK
 
 {% include feature-section.html %}
 
+<!-- Newsletter Preview Section -->
+<section class="newsletter-preview-section">
+  <div class="container">
+    <div class="newsletter-preview-card">
+      <div class="newsletter-preview-content">
+        <div class="newsletter-preview-header">
+          <h3 class="newsletter-preview-title">Latest Newsletter</h3>
+          <div class="newsletter-preview-date" id="newsletter-date">Loading...</div>
+        </div>
+        <h4 class="newsletter-preview-subject" id="newsletter-subject">Loading latest issue...</h4>
+        <p class="newsletter-preview-excerpt" id="newsletter-excerpt">Stay updated with the latest insights and updates from the NEAR ecosystem.</p>
+        <a href="#" class="newsletter-preview-link" id="newsletter-link" target="_blank" rel="noopener">
+          Read Full Issue
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="newsletter-section">
   <div class="container">
     <div class="newsletter-content">
@@ -51,4 +73,68 @@ title: NEARWEEK
   </div>
 </section>
 
+<script>
+// Newsletter Preview API Integration
+document.addEventListener('DOMContentLoaded', function() {
+  const newsletterDate = document.getElementById('newsletter-date');
+  const newsletterSubject = document.getElementById('newsletter-subject');
+  const newsletterExcerpt = document.getElementById('newsletter-excerpt');
+  const newsletterLink = document.getElementById('newsletter-link');
+  
+  // Newsletter API endpoint (replace with your actual endpoint)
+  const NEWSLETTER_API_ENDPOINT = 'https://nearweek.com/api/newsletter/latest';
+  
+  // Function to format date
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    });
+  }
+  
+  // Function to load newsletter data
+  async function loadNewsletter() {
+    try {
+      const response = await fetch(NEWSLETTER_API_ENDPOINT);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      
+      // Update the newsletter preview with API data
+      if (data.date) {
+        newsletterDate.textContent = formatDate(data.date);
+      }
+      
+      if (data.subject) {
+        newsletterSubject.textContent = data.subject;
+      }
+      
+      if (data.excerpt) {
+        newsletterExcerpt.textContent = data.excerpt;
+      }
+      
+      if (data.link) {
+        newsletterLink.href = data.link;
+      }
+      
+    } catch (error) {
+      console.error('Error loading newsletter:', error);
+      
+      // Fallback content on error
+      newsletterDate.textContent = 'Latest Issue';
+      newsletterSubject.textContent = 'NEARWEEK Newsletter';
+      newsletterExcerpt.textContent = 'Stay updated with the latest insights and updates from the NEAR ecosystem.';
+      newsletterLink.href = '#';
+    }
+  }
+  
+  // Load newsletter data when page loads
+  loadNewsletter();
+});
+</script>
 
