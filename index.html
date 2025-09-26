@@ -106,20 +106,20 @@ document.addEventListener('DOMContentLoaded', function() {
       const data = await response.json();
       
       // Update the newsletter preview with API data
-      if (data.date) {
-        newsletterDate.textContent = formatDate(data.date);
+      if (data.createTime) {
+        newsletterDate.textContent = formatDate(data.createTime);
       }
       
-      if (data.subject) {
-        newsletterSubject.textContent = data.subject;
+      if (data.title) {
+        newsletterSubject.textContent = data.title;
       }
       
-      if (data.excerpt) {
-        newsletterExcerpt.textContent = data.excerpt;
+      if (data.description) {
+        newsletterExcerpt.textContent = data.description;
       }
       
-      if (data.link) {
-        newsletterLink.href = data.link;
+      if (data.url) {
+        newsletterLink.href = data.url;
       }
       
     } catch (error) {
