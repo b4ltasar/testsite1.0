@@ -1,234 +1,578 @@
----
-layout: default
-title: NEARWEEK
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEARWEEK</title>
+    <link rel="stylesheet" href="assets/styles.css">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="section">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="stack">
+                    <h1 class="h1">THE END IS NEAR</h1>
+                    <p>NEARWEEK deliver curated news, insightful analysis, and real-time updates on the builders, projects, and innovations shaping the future of AI x Web3.</p>
+                    <p>Our mission is to connect the global NEAR community with trusted information, enabling everyone to understand, participate in, and help build the open web.</p>
+                    <p>Stay informed. Stay early. Stay NEAR.</p>
+                </div>
+                <div class="hero-card no-frame">
+                    <video autoplay loop muted playsinline preload="auto" style="width:100%; height:100%; object-fit:cover;">
+                        <source src="images/webpageherovideo.mp4" type="video/mp4" />
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
 
-{% include hero.html %}
-
-{% include cards-marquee.html %}
-
-{% include blog-section.html %}
-
-<section class="section">
-  <div class="container">
-    <div class="hero-card">
-      <video autoplay loop muted playsinline preload="auto" class="theme-video" id="themeVideo">
-        <source src="{{ '/images/webpageloop2.mp4' | relative_url }}" type="video/mp4" class="light-video" />
-        <source src="{{ '/images/webpageloop2black.mp4' | relative_url }}" type="video/mp4" class="dark-video" />
-      </video>
+    <!-- Cards Marquee -->
+    <div class="cards-marquee" id="cardsMarquee">
+        <div class="cards-track">
+            <div class="set set-a">
+                <div class="mcard">
+                    <div class="mcard-media">
+                        <img src="images/nearweekbotblack.png" alt="CONTRIBUTE">
+                    </div>
+                    <div class="mcard-body">
+                        <div class="mcard-title">CONTRIBUTE</div>
+                        <div class="mcard-text">Submit to the NEARWEEK Bot</div>
+                    </div>
+                    <a href="https://x.com/nearweekbot" target="_blank" rel="noopener" class="mcard-link"></a>
+                </div>
+                
+                <div class="mcard">
+                    <div class="mcard-media">
+                        <img src="images/nearcon2026.webp" alt="NEARCON 2026">
+                    </div>
+                    <div class="mcard-body">
+                        <div class="mcard-title">NEARCON 2026</div>
+                        <div class="mcard-text">Announcing NEARCON 2026: The Internet Wants to Think</div>
+                    </div>
+                    <a href="https://www.near.org/blog/announcing-nearcon-2026-the-internet-wants-to-think" target="_blank" rel="noopener" class="mcard-link"></a>
+                </div>
+                
+                <div class="mcard">
+                    <div class="mcard-media">
+                        <img src="images/initiatelegion.png" alt="NEAR LEGION">
+                    </div>
+                    <div class="mcard-body">
+                        <div class="mcard-title">NEAR LEGION</div>
+                        <div class="mcard-text">Pledge Your Allegiance - Join The Legion!</div>
+                    </div>
+                    <a href="https://nearlegion.com/" target="_blank" rel="noopener" class="mcard-link"></a>
+                </div>
+                
+                <div class="mcard">
+                    <div class="mcard-media">
+                        <img src="images/wdys.jpg" alt="WHAT DID YOU SHIP THIS WEEK?">
+                    </div>
+                    <div class="mcard-body">
+                        <div class="mcard-title">WHAT DID YOU SHIP THIS WEEK?</div>
+                        <div class="mcard-text">A weekly stream to highlight the latest development on NEAR</div>
+                    </div>
+                    <a href="https://youtube.com/playlist?list=PLmgxQHVg7viqjy3qOmocxs4wrtCyX0Coo&si=gsEdBzyGIDGeAaU-" target="_blank" rel="noopener" class="mcard-link"></a>
+                </div>
+                
+                <div class="mcard">
+                    <div class="mcard-media">
+                        <img src="images/neartownhall.jpg" alt="NEAR TOWN HALL">
+                    </div>
+                    <div class="mcard-body">
+                        <div class="mcard-title">NEAR TOWN HALL</div>
+                        <div class="mcard-text">Every month we feature projects, highlights and insights to NEAR ecosystem</div>
+                    </div>
+                    <a href="https://youtube.com/playlist?list=PLmgxQHVg7viopvoZg0V1Yt8fp3DEDZucF&si=30vsE5b4zw2xRI2-" target="_blank" rel="noopener" class="mcard-link"></a>
+                </div>
+            </div>
+            
+            <div class="set" aria-hidden="true">
+                <div class="mcard">
+                    <div class="mcard-media">
+                        <img src="images/nearweekbotblack.png" alt="CONTRIBUTE">
+                    </div>
+                    <div class="mcard-body">
+                        <div class="mcard-title">CONTRIBUTE</div>
+                        <div class="mcard-text">Submit to the NEARWEEK Bot</div>
+                    </div>
+                    <a href="https://x.com/nearweekbot" target="_blank" rel="noopener" class="mcard-link"></a>
+                </div>
+                
+                <div class="mcard">
+                    <div class="mcard-media">
+                        <img src="images/nearcon2026.webp" alt="NEARCON 2026">
+                    </div>
+                    <div class="mcard-body">
+                        <div class="mcard-title">NEARCON 2026</div>
+                        <div class="mcard-text">Announcing NEARCON 2026: The Internet Wants to Think</div>
+                    </div>
+                    <a href="https://www.near.org/blog/announcing-nearcon-2026-the-internet-wants-to-think" target="_blank" rel="noopener" class="mcard-link"></a>
+                </div>
+                
+                <div class="mcard">
+                    <div class="mcard-media">
+                        <img src="images/initiatelegion.png" alt="NEAR LEGION">
+                    </div>
+                    <div class="mcard-body">
+                        <div class="mcard-title">NEAR LEGION</div>
+                        <div class="mcard-text">Pledge Your Allegiance - Join The Legion!</div>
+                    </div>
+                    <a href="https://nearlegion.com/" target="_blank" rel="noopener" class="mcard-link"></a>
+                </div>
+                
+                <div class="mcard">
+                    <div class="mcard-media">
+                        <img src="images/wdys.jpg" alt="WHAT DID YOU SHIP THIS WEEK?">
+                    </div>
+                    <div class="mcard-body">
+                        <div class="mcard-title">WHAT DID YOU SHIP THIS WEEK?</div>
+                        <div class="mcard-text">A weekly stream to highlight the latest development on NEAR</div>
+                    </div>
+                    <a href="https://youtube.com/playlist?list=PLmgxQHVg7viqjy3qOmocxs4wrtCyX0Coo&si=gsEdBzyGIDGeAaU-" target="_blank" rel="noopener" class="mcard-link"></a>
+                </div>
+                
+                <div class="mcard">
+                    <div class="mcard-media">
+                        <img src="images/neartownhall.jpg" alt="NEAR TOWN HALL">
+                    </div>
+                    <div class="mcard-body">
+                        <div class="mcard-title">NEAR TOWN HALL</div>
+                        <div class="mcard-text">Every month we feature projects, highlights and insights to NEAR ecosystem</div>
+                    </div>
+                    <a href="https://youtube.com/playlist?list=PLmgxQHVg7viopvoZg0V1Yt8fp3DEDZucF&si=30vsE5b4zw2xRI2-" target="_blank" rel="noopener" class="mcard-link"></a>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="cta">
-      <h2 class="big">DATA IS POWER.</h2>
-      <p class="sub">BUILD THE FUTURE YOU WANT TO PASS TO FUTURE GENERATIONS.</p>
-      <a href="https://github.com/nearweek" target="_blank" rel="noopener" class="fork-button">
-        FORK IT
-        <svg style="margin-left:8px" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
+
+    <!-- Blog Section -->
+    <section class="blog-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Latest from the Blog</h2>
+                <p class="section-subtitle">Stay updated with the latest insights and news</p>
+            </div>
+            <div class="blog-posts" id="blog-posts">
+                <!-- Blog posts will be loaded here via JavaScript -->
+            </div>
+            <div class="load-more-container">
+                <button class="load-more-button" id="load-more-btn">Load More</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Section -->
+    <section class="feature-section">
+        <div class="container">
+            <div class="feature-header">
+                <h2 class="feature-title">NEARWEEK Merch</h2>
+                <p class="feature-subtitle">Show your support with our exclusive merchandise</p>
+            </div>
+            <div class="merch-carousel">
+                <div class="merch-track" id="merchTrack">
+                    <!-- Merch items will be loaded here via JavaScript -->
+                </div>
+                <div class="merch-controls">
+                    <button class="merch-btn prev" id="prevBtn">‹</button>
+                    <button class="merch-btn next" id="nextBtn">›</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2 class="newsletter-title">SIGN UP FOR THE OFFICIAL NEAR NEWSLETTER</h2>
+                <p class="newsletter-subtitle">Stay ahead of the curve with exclusive insights, breaking news, and deep dives into the NEAR ecosystem</p>
+                <form class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Enter your email" required>
+                    <button type="submit" class="newsletter-button">Sign Up</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating Newsletter Preview -->
+    <div class="newsletter-floating-preview" id="newsletter-floating-preview">
+        <div class="newsletter-floating-content">
+            <div class="newsletter-floating-image">
+                <img id="newsletter-image" src="" alt="Newsletter preview" style="display: none;">
+            </div>
+            <div class="newsletter-floating-info">
+                <div class="newsletter-floating-header">
+                    <div class="newsletter-floating-badge">Latest Issue</div>
+                    <div class="newsletter-floating-date" id="newsletter-date">Loading...</div>
+                </div>
+                <h3 class="newsletter-floating-title" id="newsletter-subject">Loading latest issue...</h3>
+                <p class="newsletter-floating-description" id="newsletter-excerpt">Stay updated with the latest insights and updates from the NEAR ecosystem.</p>
+                <a href="#" class="newsletter-floating-cta" id="newsletter-link" target="_blank" rel="noopener">
+                    <span>Read Full Issue</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
     </div>
-  </div>
-</section>
 
-{% include feature-section.html %}
+    <!-- Trenches Section -->
+    <section class="trenches-section">
+        <div class="container">
+            <div class="trenches-text">IN THE TRENCHES SINCE 2021</div>
+        </div>
+    </section>
 
-<section class="newsletter-section">
-  <div class="container">
-    <div class="newsletter-content">
-      <h2 class="newsletter-title">SIGN UP FOR THE OFFICIAL NEAR NEWSLETTER</h2>
-      <p class="newsletter-subtitle">Stay ahead of the curve with exclusive insights, breaking news, and deep dives into the NEAR ecosystem</p>
-      <form class="newsletter-form">
-        <input type="email" class="newsletter-input" placeholder="Enter your email" required>
-        <button type="submit" class="newsletter-button">Sign Up</button>
-      </form>
-    </div>
-  </div>
-</section>
+    <script>
+        // Newsletter Preview API Integration
+        document.addEventListener('DOMContentLoaded', function() {
+            const newsletterDate = document.getElementById('newsletter-date');
+            const newsletterSubject = document.getElementById('newsletter-subject');
+            const newsletterExcerpt = document.getElementById('newsletter-excerpt');
+            const newsletterLink = document.getElementById('newsletter-link');
+            const newsletterImage = document.getElementById('newsletter-image');
+            
+            // Newsletter API endpoint
+            const NEWSLETTER_API_ENDPOINT = 'https://nearweek.com/api/newsletter/latest';
+            
+            // Function to format date
+            function formatDate(dateString) {
+                const date = new Date(dateString);
+                return date.toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
+            }
+            
+            // Function to load newsletter data
+            async function loadNewsletter() {
+                try {
+                    const response = await fetch(NEWSLETTER_API_ENDPOINT);
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    
+                    const data = await response.json();
+                    
+                    // Update the newsletter preview with API data
+                    if (data.createTime) {
+                        newsletterDate.textContent = formatDate(data.createTime);
+                    }
+                    
+                    if (data.title) {
+                        newsletterSubject.textContent = data.title;
+                    }
+                    
+                    if (data.description) {
+                        newsletterExcerpt.textContent = data.description;
+                    }
+                    
+                    if (data.url) {
+                        newsletterLink.href = data.url;
+                    }
+                    
+                    if (data.imageUrl) {
+                        newsletterImage.src = data.imageUrl;
+                        newsletterImage.style.display = 'block';
+                    }
+                    
+                } catch (error) {
+                    console.error('Error loading newsletter:', error);
+                    
+                    // Fallback content on error
+                    newsletterDate.textContent = 'Latest Issue';
+                    newsletterSubject.textContent = 'NEARWEEK Newsletter';
+                    newsletterExcerpt.textContent = 'Stay updated with the latest insights and updates from the NEAR ecosystem.';
+                    newsletterLink.href = '#';
+                }
+            }
+            
+            // Load newsletter data when page loads
+            loadNewsletter();
+        });
 
-<!-- Floating Newsletter Preview -->
-<div class="newsletter-floating-preview" id="newsletter-floating-preview">
-  <div class="newsletter-floating-content">
-    <div class="newsletter-floating-image">
-      <img id="newsletter-image" src="" alt="Newsletter preview" style="display: none;">
-    </div>
-    <div class="newsletter-floating-info">
-      <div class="newsletter-floating-header">
-        <div class="newsletter-floating-badge">Latest Issue</div>
-        <div class="newsletter-floating-date" id="newsletter-date">Loading...</div>
-      </div>
-      <h3 class="newsletter-floating-title" id="newsletter-subject">Loading latest issue...</h3>
-      <p class="newsletter-floating-description" id="newsletter-excerpt">Stay updated with the latest insights and updates from the NEAR ecosystem.</p>
-      <a href="#" class="newsletter-floating-cta" id="newsletter-link" target="_blank" rel="noopener">
-        <span>Read Full Issue</span>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
-    </div>
-  </div>
-</div>
+        // Floating Newsletter Preview Interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            const newsletterSection = document.querySelector('.newsletter-section');
+            const floatingPreview = document.getElementById('newsletter-floating-preview');
+            let isVisible = false;
+            let hideTimeout;
 
-<section class="trenches-section">
-  <div class="container">
-    <div class="trenches-text">IN THE TRENCHES SINCE 2021</div>
-  </div>
-</section>
+            // Show floating preview
+            function showFloatingPreview() {
+                if (isVisible) return;
+                
+                isVisible = true;
+                floatingPreview.classList.add('show');
+                clearTimeout(hideTimeout);
+            }
 
-<script>
-// Newsletter Preview API Integration
-document.addEventListener('DOMContentLoaded', function() {
-  const newsletterDate = document.getElementById('newsletter-date');
-  const newsletterSubject = document.getElementById('newsletter-subject');
-  const newsletterExcerpt = document.getElementById('newsletter-excerpt');
-  const newsletterLink = document.getElementById('newsletter-link');
-  const newsletterImage = document.getElementById('newsletter-image');
-  
-  // Newsletter API endpoint (replace with your actual endpoint)
-  const NEWSLETTER_API_ENDPOINT = 'https://nearweek.com/api/newsletter/latest';
-  
-  // Function to format date
-  function formatDate(dateString) {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
-    });
-  }
-  
-  // Function to load newsletter data
-  async function loadNewsletter() {
-    try {
-      const response = await fetch(NEWSLETTER_API_ENDPOINT);
-      
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      
-      const data = await response.json();
-      
-      // Update the newsletter preview with API data
-      if (data.createTime) {
-        newsletterDate.textContent = formatDate(data.createTime);
-      }
-      
-      if (data.title) {
-        newsletterSubject.textContent = data.title;
-      }
-      
-      if (data.description) {
-        newsletterExcerpt.textContent = data.description;
-      }
-      
-      if (data.url) {
-        newsletterLink.href = data.url;
-      }
-      
-      if (data.imageUrl) {
-        newsletterImage.src = data.imageUrl;
-        newsletterImage.style.display = 'block';
-      }
-      
-    } catch (error) {
-      console.error('Error loading newsletter:', error);
-      
-      // Fallback content on error
-      newsletterDate.textContent = 'Latest Issue';
-      newsletterSubject.textContent = 'NEARWEEK Newsletter';
-      newsletterExcerpt.textContent = 'Stay updated with the latest insights and updates from the NEAR ecosystem.';
-      newsletterLink.href = '#';
-    }
-  }
-  
-  // Load newsletter data when page loads
-  loadNewsletter();
-});
+            // Hide floating preview
+            function hideFloatingPreview() {
+                if (!isVisible) return;
+                
+                isVisible = false;
+                floatingPreview.classList.remove('show');
+            }
 
-// Floating Newsletter Preview Interactions
-document.addEventListener('DOMContentLoaded', function() {
-  const newsletterSection = document.querySelector('.newsletter-section');
-  const floatingPreview = document.getElementById('newsletter-floating-preview');
-  let isVisible = false;
-  let hideTimeout;
+            // Desktop hover interactions
+            if (newsletterSection && floatingPreview) {
+                newsletterSection.addEventListener('mouseenter', showFloatingPreview);
+                newsletterSection.addEventListener('mouseleave', function() {
+                    hideTimeout = setTimeout(hideFloatingPreview, 300);
+                });
 
-  // Show floating preview
-  function showFloatingPreview() {
-    if (isVisible) return;
-    
-    isVisible = true;
-    floatingPreview.classList.add('show');
-    clearTimeout(hideTimeout);
-  }
+                // Keep preview visible when hovering over it
+                floatingPreview.addEventListener('mouseenter', function() {
+                    clearTimeout(hideTimeout);
+                });
 
-  // Hide floating preview
-  function hideFloatingPreview() {
-    if (!isVisible) return;
-    
-    isVisible = false;
-    floatingPreview.classList.remove('show');
-  }
+                floatingPreview.addEventListener('mouseleave', function() {
+                    hideTimeout = setTimeout(hideFloatingPreview, 300);
+                });
+            }
 
-  // Desktop hover interactions
-  if (newsletterSection && floatingPreview) {
-    newsletterSection.addEventListener('mouseenter', showFloatingPreview);
-    newsletterSection.addEventListener('mouseleave', function() {
-      hideTimeout = setTimeout(hideFloatingPreview, 300);
-    });
+            // Mobile and tablet touch interactions
+            let touchStartY = 0;
+            let touchStartTime = 0;
 
-    // Keep preview visible when hovering over it
-    floatingPreview.addEventListener('mouseenter', function() {
-      clearTimeout(hideTimeout);
-    });
+            if (newsletterSection && floatingPreview) {
+                newsletterSection.addEventListener('touchstart', function(e) {
+                    touchStartY = e.touches[0].clientY;
+                    touchStartTime = Date.now();
+                });
 
-    floatingPreview.addEventListener('mouseleave', function() {
-      hideTimeout = setTimeout(hideFloatingPreview, 300);
-    });
-  }
+                newsletterSection.addEventListener('touchend', function(e) {
+                    const touchEndY = e.changedTouches[0].clientY;
+                    const touchEndTime = Date.now();
+                    const touchDuration = touchEndTime - touchStartTime;
+                    const touchDistance = Math.abs(touchEndY - touchStartY);
 
-  // Mobile and tablet touch interactions
-  let touchStartY = 0;
-  let touchStartTime = 0;
+                    // Show preview on tap (short touch with minimal movement)
+                    if (touchDuration < 300 && touchDistance < 10) {
+                        if (isVisible) {
+                            hideFloatingPreview();
+                        } else {
+                            showFloatingPreview();
+                        }
+                    }
+                });
 
-  if (newsletterSection && floatingPreview) {
-    newsletterSection.addEventListener('touchstart', function(e) {
-      touchStartY = e.touches[0].clientY;
-      touchStartTime = Date.now();
-    });
+                // Hide preview when tapping outside
+                document.addEventListener('touchstart', function(e) {
+                    if (isVisible && 
+                        !newsletterSection.contains(e.target) && 
+                        !floatingPreview.contains(e.target)) {
+                        hideFloatingPreview();
+                    }
+                });
+            }
 
-    newsletterSection.addEventListener('touchend', function(e) {
-      const touchEndY = e.changedTouches[0].clientY;
-      const touchEndTime = Date.now();
-      const touchDuration = touchEndTime - touchStartTime;
-      const touchDistance = Math.abs(touchEndY - touchStartY);
+            // Close preview when clicking outside (desktop)
+            document.addEventListener('click', function(e) {
+                if (isVisible && 
+                    !newsletterSection.contains(e.target) && 
+                    !floatingPreview.contains(e.target)) {
+                    hideFloatingPreview();
+                }
+            });
+        });
 
-      // Show preview on tap (short touch with minimal movement)
-      if (touchDuration < 300 && touchDistance < 10) {
-        if (isVisible) {
-          hideFloatingPreview();
-        } else {
-          showFloatingPreview();
-        }
-      }
-    });
+        // Cards Marquee Animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const set = document.querySelector('.set-a');
+            const track = document.querySelector('.cards-track');
+            if (set && track) {
+                track.style.setProperty('--shift', `${Math.round(set.getBoundingClientRect().width)}px`);
+            }
+        });
 
-    // Hide preview when tapping outside
-    document.addEventListener('touchstart', function(e) {
-      if (isVisible && 
-          !newsletterSection.contains(e.target) && 
-          !floatingPreview.contains(e.target)) {
-        hideFloatingPreview();
-      }
-    });
-  }
+        // Blog Section API Integration
+        document.addEventListener('DOMContentLoaded', function() {
+            const blogPostsContainer = document.getElementById('blog-posts');
+            const loadMoreBtn = document.getElementById('load-more-btn');
+            
+            // Blog API endpoint
+            const BLOG_API_ENDPOINT = 'https://nearweek.com/api/articles';
+            
+            let allArticles = [];
+            let currentPage = 1;
+            const articlesPerPage = 4;
+            
+            // Function to create blog card HTML
+            function createBlogCard(article) {
+                return `
+                    <article class="blog-card">
+                        <div class="blog-card-image">
+                            <img src="${article.image || 'images/magazinepic.png'}" alt="${article.title}" loading="lazy">
+                        </div>
+                        <div class="blog-card-content">
+                            <div class="blog-card-meta">
+                                <span class="blog-card-author">${article.author || 'NEARWEEK'}</span>
+                            </div>
+                            <h3 class="blog-card-title">${article.title}</h3>
+                            <a href="${article.url}" target="_blank" rel="noopener" class="read-more">Read More</a>
+                        </div>
+                    </article>
+                `;
+            }
+            
+            // Function to display articles
+            function displayArticles() {
+                const startIndex = (currentPage - 1) * articlesPerPage;
+                const endIndex = startIndex + articlesPerPage;
+                const articlesToShow = allArticles.slice(startIndex, endIndex);
+                
+                if (currentPage === 1) {
+                    blogPostsContainer.innerHTML = '';
+                }
+                
+                articlesToShow.forEach(article => {
+                    blogPostsContainer.insertAdjacentHTML('beforeend', createBlogCard(article));
+                });
+                
+                // Show/hide load more button
+                if (endIndex >= allArticles.length) {
+                    loadMoreBtn.style.display = 'none';
+                } else {
+                    loadMoreBtn.style.display = 'inline-flex';
+                }
+            }
+            
+            // Function to load articles from API
+            async function loadArticles() {
+                try {
+                    const response = await fetch(BLOG_API_ENDPOINT);
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    
+                    const data = await response.json();
+                    
+                    // Handle both single article and array of articles
+                    if (Array.isArray(data)) {
+                        allArticles = data;
+                    } else if (data.articles && Array.isArray(data.articles)) {
+                        allArticles = data.articles;
+                    } else if (data.title) {
+                        // Single article
+                        allArticles = [data];
+                    } else {
+                        throw new Error('Invalid data format');
+                    }
+                    
+                    displayArticles();
+                    
+                } catch (error) {
+                    console.error('Error loading articles:', error);
+                    
+                    // Fallback content
+                    allArticles = [
+                        {
+                            title: 'Welcome to NEARWEEK',
+                            author: 'NEARWEEK Team',
+                            image: 'images/magazinepic.png',
+                            url: '#'
+                        }
+                    ];
+                    displayArticles();
+                }
+            }
+            
+            // Load more button event listener
+            loadMoreBtn.addEventListener('click', function() {
+                currentPage++;
+                displayArticles();
+            });
+            
+            // Load articles when page loads
+            loadArticles();
+        });
 
-  // Close preview when clicking outside (desktop)
-  document.addEventListener('click', function(e) {
-    if (isVisible && 
-        !newsletterSection.contains(e.target) && 
-        !floatingPreview.contains(e.target)) {
-      hideFloatingPreview();
-    }
-  });
-});
-</script>
-
+        // Merch Carousel
+        document.addEventListener('DOMContentLoaded', function() {
+            const merchTrack = document.getElementById('merchTrack');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            // Merch data
+            const merchItems = [
+                {
+                    title: 'NEARWEEK Mug',
+                    description: 'Premium ceramic mug with NEARWEEK branding',
+                    image: 'images/mug.png',
+                    link: '#',
+                    buttonText: 'COMING SOON'
+                },
+                {
+                    title: 'NEARWEEK Tee',
+                    description: 'Comfortable cotton t-shirt with exclusive design',
+                    image: 'images/pledgeteeblack.png',
+                    link: '#',
+                    buttonText: 'COMING SOON'
+                }
+            ];
+            
+            let currentIndex = 0;
+            
+            // Function to create merch item HTML
+            function createMerchItem(item, index) {
+                return `
+                    <div class="merch-item ${index === 0 ? 'active' : ''}" data-index="${index}">
+                        <div class="merch-image">
+                            <img src="${item.image}" alt="${item.title}" loading="lazy">
+                        </div>
+                        <div class="merch-content">
+                            <h3 class="merch-title">${item.title}</h3>
+                            <p class="merch-description">${item.description}</p>
+                            <a href="${item.link}" class="merch-button">${item.buttonText}</a>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Function to render merch items
+            function renderMerchItems() {
+                merchTrack.innerHTML = '';
+                merchItems.forEach((item, index) => {
+                    merchTrack.insertAdjacentHTML('beforeend', createMerchItem(item, index));
+                });
+            }
+            
+            // Function to update active item
+            function updateActiveItem() {
+                const items = merchTrack.querySelectorAll('.merch-item');
+                items.forEach((item, index) => {
+                    item.classList.toggle('active', index === currentIndex);
+                });
+            }
+            
+            // Navigation functions
+            function nextItem() {
+                currentIndex = (currentIndex + 1) % merchItems.length;
+                updateActiveItem();
+            }
+            
+            function prevItem() {
+                currentIndex = (currentIndex - 1 + merchItems.length) % merchItems.length;
+                updateActiveItem();
+            }
+            
+            // Event listeners
+            nextBtn.addEventListener('click', nextItem);
+            prevBtn.addEventListener('click', prevItem);
+            
+            // Auto-rotation
+            setInterval(nextItem, 5000);
+            
+            // Initialize
+            renderMerchItems();
+        });
+    </script>
+</body>
+</html>

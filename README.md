@@ -1,6 +1,6 @@
 # NEARWEEK Website
 
-A modern, responsive website built with Jekyll for the NEARWEEK community. Features dark/light theme switching, interactive 3D carousel, and optimized performance.
+A modern, responsive website built with clean HTML for the NEARWEEK community. Features dark/light theme switching, interactive 3D carousel, and optimized performance.
 
 ## Features
 
@@ -9,60 +9,30 @@ A modern, responsive website built with Jekyll for the NEARWEEK community. Featu
 - **Interactive Elements**: 3D merchandise carousel with touch support
 - **Responsive Design**: Optimized for desktop, tablet, and mobile
 - **Performance Optimized**: Fast loading with lazy loading and efficient CSS
-- **Content Management**: Easy content updates via YAML data files
+- **API Integration**: Dynamic content from NEARWEEK APIs
+- **Floating Newsletter Preview**: Interactive newsletter preview with hover/touch interactions
 
 ## Tech Stack
 
-- **Jekyll**: Static site generator
-- **GitHub Pages**: Hosting and deployment
+- **Clean HTML**: No build process dependencies
 - **CSS Custom Properties**: Modern theming system
 - **Vanilla JavaScript**: No external dependencies
+- **API Integration**: Real-time content from NEARWEEK APIs
 - **Semantic HTML**: Accessible and SEO-friendly
 
 ## Project Structure
 
 ```
 testsite/
-├── _data/                 # Content management
-│   ├── cards.yml         # Cards marquee data
-│   ├── feature.yml       # Merchandise carousel data
-│   └── ...
-├── _includes/            # Reusable components
-│   ├── header.html       # Site header with navigation
-│   ├── footer.html       # Site footer
-│   ├── hero.html         # Hero section
-│   ├── cards-marquee.html # Horizontal scrolling cards
-│   └── feature-section.html # 3D merchandise carousel
-├── _layouts/             # Page templates
-│   └── default.html      # Main layout with theme system
-├── assets/               # Static assets
-│   └── styles.css        # Main stylesheet
+├── assets/
+│   └── styles.css        # Main stylesheet with all components
 ├── images/               # Image assets
-└── index.html           # Homepage
+├── index.html           # Main HTML file (all-in-one)
+├── robots.txt           # SEO configuration
+└── sitemap.xml          # Site map
 ```
 
-## Theme System
-
-The website uses a sophisticated theme system with CSS custom properties:
-
-- **Light Theme**: Clean white background with dark text
-- **Dark Theme**: Dark background with light text
-- **Video Switching**: Theme-specific video content
-- **Persistent Storage**: User preference saved in localStorage
-
-### CSS Variables
-```css
-:root {
-  --bg: #ffffff;
-  --text: #0a0a0a;
-  --muted: #6b7280;
-  --card: #ffffff;
-  --border: rgba(0, 0, 0, 0.12);
-  --accent: #0ea5e9;
-}
-```
-
-## Key Components
+## Key Features
 
 ### 1. Hero Section
 - Large video background with theme switching
@@ -73,23 +43,32 @@ The website uses a sophisticated theme system with CSS custom properties:
 - Horizontal scrolling card display
 - Touch-friendly on mobile
 - Pause on hover for desktop
+- Seamless infinite loop
 
-### 3. Merchandise Carousel
+### 3. Blog Section
+- Dynamic content from NEARWEEK API
+- Grid layout for blog posts
+- Responsive card design
+- Load more functionality
+- Hover effects and transitions
+
+### 4. Merchandise Carousel
 - 3D perspective carousel
 - Touch/swipe support on mobile
 - Auto-rotation with manual override
 - Clean background items (images only)
 
-### 4. Blog Section
-- Grid layout for blog posts
-- Responsive card design
-- Hover effects and transitions
+### 5. Newsletter Integration
+- Floating preview on hover/touch
+- Real-time data from newsletter API
+- Glass-like animations
+- Mobile-optimized interactions
 
 ## Getting Started
 
 ### Prerequisites
-- Ruby 2.7+ (for Jekyll)
-- Bundler gem
+- Any modern web server (no build process required)
+- Modern web browser
 
 ### Installation
 ```bash
@@ -97,50 +76,34 @@ The website uses a sophisticated theme system with CSS custom properties:
 git clone https://github.com/b4ltasar/testsite.git
 cd testsite
 
-# Install dependencies
-bundle install
+# Serve locally (any method works)
+# Option 1: Python
+python -m http.server 8000
 
-# Serve locally
-bundle exec jekyll serve
+# Option 2: Node.js
+npx serve .
+
+# Option 3: PHP
+php -S localhost:8000
 
 # Open in browser
-open http://localhost:4000
+open http://localhost:8000
 ```
 
 ### Development
-```bash
-# Watch for changes
-bundle exec jekyll serve --livereload
+Simply edit the HTML, CSS, or JavaScript files directly. No build process required!
 
-# Build for production
-bundle exec jekyll build
-```
+## API Integration
 
-## Content Management
+### Newsletter API
+- **Endpoint**: `https://nearweek.com/api/newsletter/latest`
+- **Features**: Real-time newsletter preview with image, title, description, and link
+- **Fallback**: Graceful degradation if API is unavailable
 
-### Adding New Cards
-Edit `_data/cards.yml`:
-```yaml
-items:
-  - title: "New Card"
-    text: "Description"
-    image: "/images/card-image.png"
-    link: "https://example.com"
-```
-
-### Adding Merchandise
-Edit `_data/feature.yml`:
-```yaml
-items:
-  - title: "New Product"
-    description: "Product description"
-    image: "/images/product.png"
-    link: "https://shop.example.com"
-    button_text: "BUY NOW"
-```
-
-### Adding Blog Posts
-Create new files in `_posts/` with Jekyll front matter.
+### Blog API
+- **Endpoint**: `https://nearweek.com/api/articles`
+- **Features**: Dynamic blog post loading with pagination
+- **Fallback**: Static content if API is unavailable
 
 ## Customization
 
@@ -149,6 +112,8 @@ Update CSS custom properties in `assets/styles.css`:
 ```css
 :root {
   --accent: #your-color;
+  --bg: #your-bg-color;
+  --text: #your-text-color;
 }
 ```
 
@@ -177,33 +142,41 @@ Adjust spacing and sizing using the CSS custom properties system.
 - Keyboard navigation (arrow keys)
 - Auto-rotation with pause on interaction
 
+### Newsletter Preview
+- Hover interactions for desktop
+- Touch interactions for mobile/tablet
+- Smooth animations and transitions
+- API integration with fallback content
+
 ### Performance Optimizations
 - Lazy loading for images
 - Efficient event listeners
 - Debounced resize handlers
+- Minimal JavaScript footprint
 
 ## Deployment
 
-The site is automatically deployed to GitHub Pages on every push to the `main` branch.
+The site can be deployed to any static hosting service:
+
+- **GitHub Pages**: Push to main branch
+- **Netlify**: Connect repository
+- **Vercel**: Import project
+- **Any static host**: Upload files directly
 
 ### Manual Deployment
 ```bash
-# Build the site
-bundle exec jekyll build
-
-# Deploy to GitHub Pages
-git add .
-git commit -m "Deploy updates"
-git push origin main
+# Simply upload all files to your web server
+# No build process required!
 ```
 
 ## Troubleshooting
 
 ### Common Issues
 
-1. **Video not switching themes**
-   - Check browser console for JavaScript errors
-   - Verify video files exist in `/images/`
+1. **API not loading**
+   - Check browser console for CORS errors
+   - Verify API endpoints are accessible
+   - Fallback content will display automatically
 
 2. **Carousel not working**
    - Ensure JavaScript is enabled
@@ -211,7 +184,16 @@ git push origin main
 
 3. **Styles not loading**
    - Clear browser cache
-   - Check file paths in `_layouts/default.html`
+   - Check file paths in HTML
+
+## Advantages of Clean HTML
+
+- **No Build Process**: Edit and deploy immediately
+- **Universal Compatibility**: Works on any web server
+- **Fast Loading**: No compilation overhead
+- **Easy Maintenance**: Direct file editing
+- **Portable**: Move between hosting providers easily
+- **Reliable**: No dependency management issues
 
 ## License
 
@@ -221,7 +203,7 @@ This project is proprietary to NEARWEEK.
 
 For internal development, please:
 1. Create a feature branch
-2. Make your changes
+2. Make your changes directly to HTML/CSS/JS
 3. Test thoroughly
 4. Submit a pull request
 
