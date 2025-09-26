@@ -36,6 +36,9 @@ title: NEARWEEK
 <section class="newsletter-preview-section">
   <div class="container">
     <div class="newsletter-preview-card">
+      <div class="newsletter-preview-image">
+        <img id="newsletter-image" src="" alt="Newsletter preview" style="display: none;">
+      </div>
       <div class="newsletter-preview-content">
         <div class="newsletter-preview-header">
           <h3 class="newsletter-preview-title">Latest Newsletter</h3>
@@ -80,6 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const newsletterSubject = document.getElementById('newsletter-subject');
   const newsletterExcerpt = document.getElementById('newsletter-excerpt');
   const newsletterLink = document.getElementById('newsletter-link');
+  const newsletterImage = document.getElementById('newsletter-image');
   
   // Newsletter API endpoint (replace with your actual endpoint)
   const NEWSLETTER_API_ENDPOINT = 'https://nearweek.com/api/newsletter/latest';
@@ -120,6 +124,11 @@ document.addEventListener('DOMContentLoaded', function() {
       
       if (data.url) {
         newsletterLink.href = data.url;
+      }
+      
+      if (data.imageUrl) {
+        newsletterImage.src = data.imageUrl;
+        newsletterImage.style.display = 'block';
       }
       
     } catch (error) {
