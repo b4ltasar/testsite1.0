@@ -32,32 +32,6 @@ title: NEARWEEK
 
 {% include feature-section.html %}
 
-<!-- Newsletter Preview Section -->
-<section class="newsletter-preview-section">
-  <div class="container">
-    <div class="newsletter-magazine">
-      <div class="newsletter-magazine-image">
-        <img id="newsletter-image" src="" alt="Newsletter preview" style="display: none;">
-        <div class="newsletter-magazine-overlay"></div>
-      </div>
-      <div class="newsletter-magazine-content">
-        <div class="newsletter-magazine-header">
-          <div class="newsletter-magazine-badge">Latest Issue</div>
-          <div class="newsletter-magazine-date" id="newsletter-date">Loading...</div>
-        </div>
-        <h3 class="newsletter-magazine-title" id="newsletter-subject">Loading latest issue...</h3>
-        <p class="newsletter-magazine-description" id="newsletter-excerpt">Stay updated with the latest insights and updates from the NEAR ecosystem.</p>
-        <a href="#" class="newsletter-magazine-cta" id="newsletter-link" target="_blank" rel="noopener">
-          <span>Read Full Issue</span>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section class="newsletter-section">
   <div class="container">
     <div class="newsletter-content">
@@ -70,6 +44,29 @@ title: NEARWEEK
     </div>
   </div>
 </section>
+
+<!-- Floating Newsletter Preview -->
+<div class="newsletter-floating-preview" id="newsletter-floating-preview">
+  <div class="newsletter-floating-content">
+    <div class="newsletter-floating-image">
+      <img id="newsletter-image" src="" alt="Newsletter preview" style="display: none;">
+    </div>
+    <div class="newsletter-floating-info">
+      <div class="newsletter-floating-header">
+        <div class="newsletter-floating-badge">Latest Issue</div>
+        <div class="newsletter-floating-date" id="newsletter-date">Loading...</div>
+      </div>
+      <h3 class="newsletter-floating-title" id="newsletter-subject">Loading latest issue...</h3>
+      <p class="newsletter-floating-description" id="newsletter-excerpt">Stay updated with the latest insights and updates from the NEAR ecosystem.</p>
+      <a href="#" class="newsletter-floating-cta" id="newsletter-link" target="_blank" rel="noopener">
+        <span>Read Full Issue</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</div>
 
 <section class="trenches-section">
   <div class="container">
@@ -145,6 +142,93 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Load newsletter data when page loads
   loadNewsletter();
+});
+
+// Floating Newsletter Preview Interactions
+document.addEventListener('DOMContentLoaded', function() {
+  const newsletterSection = document.querySelector('.newsletter-section');
+  const floatingPreview = document.getElementById('newsletter-floating-preview');
+  let isVisible = false;
+  let hideTimeout;
+
+  // Show floating preview
+  function showFloatingPreview() {
+    if (isVisible) return;
+    
+    isVisible = true;
+    floatingPreview.classList.add('show');
+    clearTimeout(hideTimeout);
+  }
+
+  // Hide floating preview
+  function hideFloatingPreview() {
+    if (!isVisible) return;
+    
+    isVisible = false;
+    floatingPreview.classList.remove('show');
+  }
+
+  // Desktop hover interactions
+  if (newsletterSection && floatingPreview) {
+    newsletterSection.addEventListener('mouseenter', showFloatingPreview);
+    newsletterSection.addEventListener('mouseleave', function() {
+      hideTimeout = setTimeout(hideFloatingPreview, 300);
+    });
+
+    // Keep preview visible when hovering over it
+    floatingPreview.addEventListener('mouseenter', function() {
+      clearTimeout(hideTimeout);
+    });
+
+    floatingPreview.addEventListener('mouseleave', function() {
+      hideTimeout = setTimeout(hideFloatingPreview, 300);
+    });
+  }
+
+  // Mobile and tablet touch interactions
+  let touchStartY = 0;
+  let touchStartTime = 0;
+
+  if (newsletterSection && floatingPreview) {
+    newsletterSection.addEventListener('touchstart', function(e) {
+      touchStartY = e.touches[0].clientY;
+      touchStartTime = Date.now();
+    });
+
+    newsletterSection.addEventListener('touchend', function(e) {
+      const touchEndY = e.changedTouches[0].clientY;
+      const touchEndTime = Date.now();
+      const touchDuration = touchEndTime - touchStartTime;
+      const touchDistance = Math.abs(touchEndY - touchStartY);
+
+      // Show preview on tap (short touch with minimal movement)
+      if (touchDuration < 300 && touchDistance < 10) {
+        if (isVisible) {
+          hideFloatingPreview();
+        } else {
+          showFloatingPreview();
+        }
+      }
+    });
+
+    // Hide preview when tapping outside
+    document.addEventListener('touchstart', function(e) {
+      if (isVisible && 
+          !newsletterSection.contains(e.target) && 
+          !floatingPreview.contains(e.target)) {
+        hideFloatingPreview();
+      }
+    });
+  }
+
+  // Close preview when clicking outside (desktop)
+  document.addEventListener('click', function(e) {
+    if (isVisible && 
+        !newsletterSection.contains(e.target) && 
+        !floatingPreview.contains(e.target)) {
+      hideFloatingPreview();
+    }
+  });
 });
 </script>
 
