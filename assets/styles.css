@@ -295,12 +295,12 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
   .cards-marquee::-webkit-scrollbar-thumb { background: var(--text); border-radius: 2px; }
 }
 @keyframes cards-marquee{ 
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-1 * var(--shift))); }
 }
 
 /* kort */
-.mcard{
+.set .mcard{
   flex:0 0 340px; 
   background:var(--card); 
   border:1px solid var(--border);
@@ -310,6 +310,10 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
   position: relative;
   transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
   margin-right: 16px;
+}
+
+.set .mcard:last-child {
+  margin-right: 0;
 }
 .mcard:hover {
   transform: translateY(-8px);
@@ -343,14 +347,16 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
 /* =========================
    Cards marquee
    ========================= */
-.cards-marquee{ position:relative; overflow-x: auto; overflow-y: hidden; padding:40px 0; touch-action: pan-y pan-x; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
+.cards-marquee{ position:relative; overflow:hidden; padding:40px 0; }
 .cards-marquee::-webkit-scrollbar { height: 6px; }
 .cards-marquee::-webkit-scrollbar-track { background: var(--border); border-radius: 3px; }
 .cards-marquee::-webkit-scrollbar-thumb { background: var(--text); border-radius: 3px; }
 .cards-marquee::-webkit-scrollbar-thumb:hover { background: var(--muted); }
-.cards-track{ display:flex; width:max-content; padding:10px 0; animation:cards-marquee 40s linear infinite; will-change:transform; }
+.cards-track{ display:flex; will-change:transform; animation:cards-marquee 40s linear infinite; }
 .cards-marquee:hover .cards-track{ animation-play-state:paused; }
 .cards-track.paused{ animation-play-state:paused; }
+
+.set{ display:flex; }
 
 /* Enable automatic scrolling on mobile/tablet */
 @media (max-width: 1024px) {
@@ -366,12 +372,12 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
   .cards-marquee::-webkit-scrollbar-thumb { background: var(--text); border-radius: 2px; }
 }
 @keyframes cards-marquee{ 
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-1 * var(--shift))); }
 }
 
 /* kort */
-.mcard{
+.set .mcard{
   flex:0 0 340px; 
   background:var(--card); 
   border:1px solid var(--border);
@@ -381,6 +387,10 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
   position: relative;
   transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
   margin-right: 16px;
+}
+
+.set .mcard:last-child {
+  margin-right: 0;
 }
 .mcard:hover {
   transform: translateY(-8px);
