@@ -296,7 +296,7 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
 }
 @keyframes cards-marquee{ 
   0% { transform: translateX(0); }
-  100% { transform: translateX(calc(-50% - 8px)); }
+  100% { transform: translateX(-50%); }
 }
 
 /* kort */
@@ -309,6 +309,7 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
   box-shadow:0 4px 20px rgba(0,0,0,.08);
   position: relative;
   transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-right: 16px;
 }
 .mcard:hover {
   transform: translateY(-8px);
@@ -347,7 +348,7 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
 .cards-marquee::-webkit-scrollbar-track { background: var(--border); border-radius: 3px; }
 .cards-marquee::-webkit-scrollbar-thumb { background: var(--text); border-radius: 3px; }
 .cards-marquee::-webkit-scrollbar-thumb:hover { background: var(--muted); }
-.cards-track{ display:flex; gap:16px; width:max-content; padding:10px 0; animation:cards-marquee 40s linear infinite; will-change:transform; }
+.cards-track{ display:flex; width:max-content; padding:10px 0; animation:cards-marquee 40s linear infinite; will-change:transform; }
 .cards-marquee:hover .cards-track{ animation-play-state:paused; }
 .cards-track.paused{ animation-play-state:paused; }
 
@@ -366,7 +367,7 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
 }
 @keyframes cards-marquee{ 
   0% { transform: translateX(0); }
-  100% { transform: translateX(calc(-50% - 8px)); }
+  100% { transform: translateX(-50%); }
 }
 
 /* kort */
@@ -379,6 +380,7 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
   box-shadow:0 4px 20px rgba(0,0,0,.08);
   position: relative;
   transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-right: 16px;
 }
 .mcard:hover {
   transform: translateY(-8px);
