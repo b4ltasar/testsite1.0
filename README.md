@@ -73,8 +73,8 @@ testsite/
 ### Installation
 ```bash
 # Clone the repository
-git clone https://github.com/b4ltasar/testsite.git
-cd testsite
+git clone https://github.com/b4ltasar/testsite1.0.git
+cd testsite1.0
 
 # Serve locally (any method works)
 # Option 1: Python
@@ -92,6 +92,9 @@ open http://localhost:8000
 
 ### Development
 Simply edit the HTML, CSS, or JavaScript files directly. No build process required!
+
+### GitHub Pages Deployment
+The site is automatically deployed to GitHub Pages. The `.nojekyll` file tells GitHub Pages to serve the files as static HTML without Jekyll processing.
 
 ## API Integration
 
