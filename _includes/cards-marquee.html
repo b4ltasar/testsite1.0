@@ -1,20 +1,6 @@
-<!-- Cards Marquee - SIMPLE VERSION -->
+<!-- Cards Marquee - FIXED VERSION -->
 <div class="cards-container">
   <div class="cards-scroll">
-    {% for card in site.data.cards.items %}
-      <div class="card">
-        <div class="card-image">
-          <img src="{{ card.image | relative_url }}" alt="{{ card.title }}">
-        </div>
-        <div class="card-content">
-          <h3 class="card-title">{{ card.title }}</h3>
-          <p class="card-text">{{ card.text }}</p>
-        </div>
-        <a href="{{ card.link }}" target="_blank" rel="noopener" class="card-link"></a>
-      </div>
-    {% endfor %}
-    
-    <!-- Duplicate for seamless loop -->
     {% for card in site.data.cards.items %}
       <div class="card">
         <div class="card-image">
