@@ -296,7 +296,7 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
 }
 @keyframes cards-marquee{ 
   from { transform: translateX(0); }
-  to { transform: translateX(calc(-1 * var(--shift))); }
+  to { transform: translateX(-50%); }
 }
 
 /* kort */
@@ -347,7 +347,7 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
 /* =========================
    Cards marquee
    ========================= */
-.cards-marquee{ position:relative; overflow-x: auto; overflow-y: hidden; padding:40px 0; touch-action: pan-y pan-x; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
+.cards-marquee{ position:relative; overflow:hidden; padding:40px 0; }
 .cards-marquee::-webkit-scrollbar { height: 6px; }
 .cards-marquee::-webkit-scrollbar-track { background: var(--border); border-radius: 3px; }
 .cards-marquee::-webkit-scrollbar-thumb { background: var(--text); border-radius: 3px; }
@@ -355,6 +355,8 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
 .cards-track{ display:flex; will-change:transform; animation:cards-marquee 40s linear infinite; }
 .cards-marquee:hover .cards-track{ animation-play-state:paused; }
 .cards-track.paused{ animation-play-state:paused; }
+
+.set{ display:flex; }
 
 .set{ display:flex; }
 
@@ -373,7 +375,7 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
 }
 @keyframes cards-marquee{ 
   from { transform: translateX(0); }
-  to { transform: translateX(calc(-1 * var(--shift))); }
+  to { transform: translateX(-50%); }
 }
 
 /* kort */
@@ -1818,37 +1820,5 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
   background: var(--bg);
 }
 
-/* Fix mobile card spacing */
-@media (max-width: 768px) {
-  .set .mcard {
-    flex: 0 0 250px;
-    margin-right: 8px;
-  }
-  
-  .set .mcard:last-child {
-    margin-right: 0;
-  }
-  
-  .cards-marquee {
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding: 20px 0;
-  }
-  
-  .cards-track {
-    animation: none;
-  }
-}
-
-@media (max-width: 480px) {
-  .set .mcard {
-    flex: 0 0 220px;
-    margin-right: 6px;
-  }
-  
-  .cards-marquee {
-    padding: 15px 0;
-  }
-}
 /* Remove frame when needed */
 .no-frame{ border:0 !important; background:transparent !important; box-shadow:none !important; }
