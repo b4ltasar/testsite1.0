@@ -371,13 +371,30 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
   to { transform: translateX(-50%); }
 }
 
-/* Desktop - Auto scroll */
+/* Desktop - Auto scroll + Manual scroll */
 @media (min-width: 769px) {
   .cards-marquee {
-    overflow-x: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
   }
   .cards-track {
     animation: cards-marquee 40s linear infinite;
+  }
+  .cards-marquee::-webkit-scrollbar {
+    height: 6px;
+  }
+  .cards-marquee::-webkit-scrollbar-track {
+    background: var(--border);
+    border-radius: 3px;
+  }
+  .cards-marquee::-webkit-scrollbar-thumb {
+    background: var(--text);
+    border-radius: 3px;
+  }
+  .cards-marquee::-webkit-scrollbar-thumb:hover {
+    background: var(--muted);
   }
 }
 
