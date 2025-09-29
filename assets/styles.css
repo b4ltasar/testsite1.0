@@ -281,32 +281,31 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
 }
 
 /* =========================
-   Cards Marquee - COMPLETELY FIXED
+   Cards Marquee - PERFECT LOOP
    ========================= */
-.cards-marquee {
-  position: relative;
-  overflow-x: hidden;
-  overflow-y: hidden;
+.marquee {
+  overflow: hidden;
   padding: 40px 0;
   width: 100%;
 }
 
 .cards-track {
   display: flex;
-  gap: 16px; /* GAP between cards */
-  width: max-content;
-  padding: 10px 0;
-  animation: cards-marquee 40s linear infinite;
   will-change: transform;
+  animation: cards-marquee var(--dur, 40s) linear infinite;
 }
 
-.cards-marquee:hover .cards-track {
+.marquee:hover .cards-track {
   animation-play-state: paused;
+}
+
+.set {
+  display: flex; /* ingen gap/padding vandret her */
 }
 
 /* Card styling */
 .mcard {
-  flex: 0 0 340px;
+  flex: 0 0 340px; /* lås bredde, ingen krymp */
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 16px;
@@ -315,6 +314,11 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
   position: relative;
   transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
+  margin-right: 16px; /* spacing pr. kort */
+}
+
+.set .mcard:last-child {
+  margin-right: 0; /* fjern tom hale */
 }
 
 .mcard:hover {
@@ -365,15 +369,14 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
   font-size: 14px;
 }
 
-/* Animation - moves exactly 50% to create seamless loop */
 @keyframes cards-marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from { transform: translate3d(0,0,0); }
+  to   { transform: translate3d(var(--shift),0,0); } /* præcis ét sæts bredde */
 }
 
 /* Desktop - Auto scroll + Manual scroll */
 @media (min-width: 769px) {
-  .cards-marquee {
+  .marquee {
     overflow-x: auto;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
@@ -382,18 +385,18 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
   .cards-track {
     animation: cards-marquee 40s linear infinite;
   }
-  .cards-marquee::-webkit-scrollbar {
+  .marquee::-webkit-scrollbar {
     height: 6px;
   }
-  .cards-marquee::-webkit-scrollbar-track {
+  .marquee::-webkit-scrollbar-track {
     background: var(--border);
     border-radius: 3px;
   }
-  .cards-marquee::-webkit-scrollbar-thumb {
+  .marquee::-webkit-scrollbar-thumb {
     background: var(--text);
     border-radius: 3px;
   }
-  .cards-marquee::-webkit-scrollbar-thumb:hover {
+  .marquee::-webkit-scrollbar-thumb:hover {
     background: var(--muted);
   }
 }
@@ -410,7 +413,7 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
 
 /* Mobile - Manual scroll */
 @media (max-width: 768px) {
-  .cards-marquee {
+  .marquee {
     overflow-x: auto;
     overflow-y: hidden;
     padding: 20px 0;
@@ -420,23 +423,22 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
   
   .cards-track {
     animation: none;
-    gap: 12px;
   }
   
   .mcard {
     flex: 0 0 280px;
   }
   
-  .cards-marquee::-webkit-scrollbar {
+  .marquee::-webkit-scrollbar {
     height: 4px;
   }
   
-  .cards-marquee::-webkit-scrollbar-track {
+  .marquee::-webkit-scrollbar-track {
     background: var(--border);
     border-radius: 2px;
   }
   
-  .cards-marquee::-webkit-scrollbar-thumb {
+  .marquee::-webkit-scrollbar-thumb {
     background: var(--text);
     border-radius: 2px;
   }
