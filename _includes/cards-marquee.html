@@ -14,36 +14,6 @@
         </div>
       {% endfor %}
     </div>
-    
-    <div class="set" aria-hidden="true">
-      {% for card in site.data.cards.items %}
-        <div class="mcard">
-          <div class="mcard-media">
-            <img src="{{ card.image | relative_url }}" alt="{{ card.title }}">
-          </div>
-          <div class="mcard-body">
-            <div class="mcard-title">{{ card.title }}</div>
-            <div class="mcard-text">{{ card.text }}</div>
-          </div>
-          <a href="{{ card.link }}" target="_blank" rel="noopener" class="mcard-link"></a>
-        </div>
-      {% endfor %}
-    </div>
-    
-    <div class="set" aria-hidden="true">
-      {% for card in site.data.cards.items %}
-        <div class="mcard">
-          <div class="mcard-media">
-            <img src="{{ card.image | relative_url }}" alt="{{ card.title }}">
-          </div>
-          <div class="mcard-body">
-            <div class="mcard-title">{{ card.title }}</div>
-            <div class="mcard-text">{{ card.text }}</div>
-          </div>
-          <a href="{{ card.link }}" target="_blank" rel="noopener" class="mcard-link"></a>
-        </div>
-      {% endfor %}
-    </div>
   </div>
 </div>
 
@@ -53,58 +23,75 @@ document.addEventListener('DOMContentLoaded', function() {
   const rail = document.getElementById('rail');
   const setA = document.getElementById('set-a');
 
-  // Mål præcis bredde af ét sæt (inkl. margins)
+  // Detekter platform
+  const IS_TOUCH = matchMedia('(pointer:coarse)').matches;
+  const IS_MOBILE = IS_TOUCH || window.innerWidth < 768;
+  const RRM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Klon A til to ekstra sæt = A B C
+  function ensureClones() {
+    const have = rail.querySelectorAll('.set').length;
+    for (let i = have; i < 3; i++) {
+      const clone = setA.cloneNode(true);
+      clone.setAttribute('aria-hidden','true');
+      rail.appendChild(clone);
+    }
+  }
+  ensureClones();
+
+  // Mål præcis bredde (inkl. margin) og center i midterste set (B)
   function setWidth() { 
     return Math.round(setA.getBoundingClientRect().width); 
   }
-
-  // Start i midterste sæt
   function centerOnMiddle() { 
     marquee.scrollLeft = setWidth(); 
   }
-  
-  window.addEventListener('load', centerOnMiddle);
-  window.addEventListener('resize', () => { centerOnMiddle(); });
 
+  addEventListener('load', () => { centerOnMiddle(); kick(); });
+
+  // Recalc ved resize / billeder loader (iOS kan ændre bredder sent)
+  const ro = new ResizeObserver(() => centerOnMiddle());
+  ro.observe(rail);
+
+  // Auto-scroll parametre
   let userActive = false;
-  let lastTs = 0;
-  let speed = 0.35; // px per ms (justér tempo)
+  let last = 0;
+  // Sæt lavere hastighed:
+  let SPEED = 0.15; // px/ms (0.15 ≈ ~9px/s) – justér til dit ønskede tempo
 
-  function autoScroll(ts) {
-    if (!lastTs) lastTs = ts;
-    const dt = ts - lastTs;
-    lastTs = ts;
-
-    if (!userActive && !prefersReducedMotion()) {
-      marquee.scrollLeft += speed * dt;
-    }
-    wrapIfNeeded();
-    requestAnimationFrame(autoScroll);
-  }
-
-  function wrapIfNeeded() {
+  function wrap() {
     const w = setWidth();
-    // Hvis vi scroller forbi højre kant af midtersættet, flyt tilbage én set-bredde
-    if (marquee.scrollLeft >= w * 2) marquee.scrollLeft -= w;
-    // Hvis vi scroller forbi venstre kant, flyt frem én set-bredde
-    else if (marquee.scrollLeft <= 0) marquee.scrollLeft += w;
+    const x = marquee.scrollLeft;
+    // Hold os inde i midterste set (B). Buffer = 0.5 set på hver side.
+    if (x < 0.5 * w)        marquee.scrollLeft = x + w; // scroll mod venstre -> hop frem
+    else if (x > 1.5 * w)   marquee.scrollLeft = x - w; // scroll mod højre  -> hop tilbage
   }
 
-  function prefersReducedMotion() {
-    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function onInteraction(active) { userActive = active; }
+
+  ['pointerdown','touchstart','wheel','keydown','mouseenter','focusin']
+    .forEach(ev => marquee.addEventListener(ev, () => onInteraction(true), {passive:true}));
+  ['pointerup','touchend','mouseleave','focusout']
+    .forEach(ev => marquee.addEventListener(ev, () => onInteraction(false), {passive:true}));
+
+  marquee.addEventListener('scroll', wrap, {passive:true});
+
+  // Start auto kun på desktop uden reduced-motion
+  function kick() {
+    if (IS_MOBILE || RRM) return; // ingen auto på mobil
+    requestAnimationFrame(tick);
   }
 
-  // Pause/resume ved interaktion
-  ['pointerdown','touchstart','mouseenter','focusin'].forEach(ev =>
-    marquee.addEventListener(ev, () => userActive = true, {passive:true})
-  );
-  ['pointerup','touchend','mouseleave','focusout'].forEach(ev =>
-    marquee.addEventListener(ev, () => userActive = false, {passive:true})
-  );
+  function tick(ts) {
+    if (!last) last = ts;
+    const dt = ts - last;
+    last = ts;
 
-  // Ved manuel scroll skal vi stadig wrappe
-  marquee.addEventListener('scroll', wrapIfNeeded, {passive:true});
+    // Scroll **mod højre** i scrollLeft-koordinater ⇒ indhold bevæger sig **mod venstre**
+    if (!userActive) marquee.scrollLeft += SPEED * dt;
 
-  requestAnimationFrame(autoScroll);
+    wrap();
+    requestAnimationFrame(tick);
+  }
 });
 </script>

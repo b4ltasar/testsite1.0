@@ -281,16 +281,15 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
 }
 
 /* =========================
-   Cards Marquee - ENDLESS + MANUAL SCROLL
+   Cards Marquee - PERFECT ENDLESS SCROLL
    ========================= */
 .marquee {
-  overflow-x: auto;               /* native scroll (mus/touch) */
+  overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  scroll-behavior: auto;
+  overscroll-behavior-x: contain;
   scrollbar-width: none;
   padding: 40px 0;
   width: 100%;
-  overscroll-behavior-x: contain;  /* ingen gummibånd */
 }
 
 .marquee::-webkit-scrollbar { 
@@ -298,12 +297,14 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
 }
 
 .rail { 
-  display: inline-flex;   /* ingen gap/padding på rail */
+  display: inline-flex; 
 }
 
 .set { 
   display: inline-flex; 
 }
+
+/* ingen gap/padding på .rail/.set */
 
 /* Card styling */
 .mcard {
@@ -320,7 +321,14 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
 }
 
 .set .mcard:last-child {
-  margin-right: 0;   /* ingen trailing luft */
+  margin-right: 0;
+}
+
+/* undgå reflow når billeder loader */
+.mcard-media img {
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 
 .mcard:hover {
