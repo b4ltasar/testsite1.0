@@ -281,31 +281,33 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
 }
 
 /* =========================
-   Cards Marquee - PERFECT LOOP
+   Cards Marquee - ENDLESS + MANUAL SCROLL
    ========================= */
 .marquee {
-  overflow: hidden;
+  overflow-x: auto;               /* native scroll (mus/touch) */
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: auto;
+  scrollbar-width: none;
   padding: 40px 0;
   width: 100%;
+  overscroll-behavior-x: contain;  /* ingen gummibånd */
 }
 
-.cards-track {
-  display: flex;
-  will-change: transform;
-  animation: cards-marquee var(--dur, 40s) linear infinite;
+.marquee::-webkit-scrollbar { 
+  display: none; 
 }
 
-.marquee:hover .cards-track {
-  animation-play-state: paused;
+.rail { 
+  display: inline-flex;   /* ingen gap/padding på rail */
 }
 
-.set {
-  display: flex; /* ingen gap/padding vandret her */
+.set { 
+  display: inline-flex; 
 }
 
 /* Card styling */
 .mcard {
-  flex: 0 0 340px; /* lås bredde, ingen krymp */
+  flex: 0 0 340px;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 16px;
@@ -314,11 +316,11 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
   position: relative;
   transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
-  margin-right: 16px; /* spacing pr. kort */
+  margin-right: 16px;
 }
 
 .set .mcard:last-child {
-  margin-right: 0; /* fjern tom hale */
+  margin-right: 0;   /* ingen trailing luft */
 }
 
 .mcard:hover {
@@ -369,78 +371,19 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
   font-size: 14px;
 }
 
-@keyframes cards-marquee {
-  from { transform: translate3d(0,0,0); }
-  to   { transform: translate3d(var(--shift),0,0); } /* præcis ét sæts bredde */
-}
-
-/* Desktop - Auto scroll + Manual scroll */
-@media (min-width: 769px) {
-  .marquee {
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-  }
-  .cards-track {
-    animation: cards-marquee 40s linear infinite;
-  }
-  .marquee::-webkit-scrollbar {
-    height: 6px;
-  }
-  .marquee::-webkit-scrollbar-track {
-    background: var(--border);
-    border-radius: 3px;
-  }
-  .marquee::-webkit-scrollbar-thumb {
-    background: var(--text);
-    border-radius: 3px;
-  }
-  .marquee::-webkit-scrollbar-thumb:hover {
-    background: var(--muted);
-  }
-}
-
-/* Tablet - Auto scroll faster */
-@media (max-width: 1024px) and (min-width: 769px) {
-  .cards-track {
-    animation: cards-marquee 30s linear infinite;
-  }
+/* Responsive card sizes */
+@media (max-width: 1024px) {
   .mcard {
     flex: 0 0 300px;
   }
 }
 
-/* Mobile - Manual scroll */
 @media (max-width: 768px) {
   .marquee {
-    overflow-x: auto;
-    overflow-y: hidden;
     padding: 20px 0;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
   }
-  
-  .cards-track {
-    animation: none;
-  }
-  
   .mcard {
     flex: 0 0 280px;
-  }
-  
-  .marquee::-webkit-scrollbar {
-    height: 4px;
-  }
-  
-  .marquee::-webkit-scrollbar-track {
-    background: var(--border);
-    border-radius: 2px;
-  }
-  
-  .marquee::-webkit-scrollbar-thumb {
-    background: var(--text);
-    border-radius: 2px;
   }
 }
 

@@ -1,6 +1,6 @@
-<div class="marquee" id="cardsMarquee">
-  <div class="cards-track">
-    <div class="set set-a">
+<div class="marquee" id="marquee">
+  <div class="rail" id="rail">
+    <div class="set" id="set-a">
       {% for card in site.data.cards.items %}
         <div class="mcard">
           <div class="mcard-media">
@@ -15,7 +15,22 @@
       {% endfor %}
     </div>
     
-    <div class="set set-b" aria-hidden="true">
+    <div class="set" aria-hidden="true">
+      {% for card in site.data.cards.items %}
+        <div class="mcard">
+          <div class="mcard-media">
+            <img src="{{ card.image | relative_url }}" alt="{{ card.title }}">
+          </div>
+          <div class="mcard-body">
+            <div class="mcard-title">{{ card.title }}</div>
+            <div class="mcard-text">{{ card.text }}</div>
+          </div>
+          <a href="{{ card.link }}" target="_blank" rel="noopener" class="mcard-link"></a>
+        </div>
+      {% endfor %}
+    </div>
+    
+    <div class="set" aria-hidden="true">
       {% for card in site.data.cards.items %}
         <div class="mcard">
           <div class="mcard-media">
@@ -34,13 +49,62 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  const track = document.querySelector('.cards-track');
-  const setA = document.querySelector('.set-a');
-  
-  if (track && setA) {
-    // sikker spacing: mål inkl. marginer
-    const width = Math.round(setA.getBoundingClientRect().width);
-    track.style.setProperty('--shift', `-${width}px`);
+  const marquee = document.getElementById('marquee');
+  const rail = document.getElementById('rail');
+  const setA = document.getElementById('set-a');
+
+  // Mål præcis bredde af ét sæt (inkl. margins)
+  function setWidth() { 
+    return Math.round(setA.getBoundingClientRect().width); 
   }
+
+  // Start i midterste sæt
+  function centerOnMiddle() { 
+    marquee.scrollLeft = setWidth(); 
+  }
+  
+  window.addEventListener('load', centerOnMiddle);
+  window.addEventListener('resize', () => { centerOnMiddle(); });
+
+  let userActive = false;
+  let lastTs = 0;
+  let speed = 0.35; // px per ms (justér tempo)
+
+  function autoScroll(ts) {
+    if (!lastTs) lastTs = ts;
+    const dt = ts - lastTs;
+    lastTs = ts;
+
+    if (!userActive && !prefersReducedMotion()) {
+      marquee.scrollLeft += speed * dt;
+    }
+    wrapIfNeeded();
+    requestAnimationFrame(autoScroll);
+  }
+
+  function wrapIfNeeded() {
+    const w = setWidth();
+    // Hvis vi scroller forbi højre kant af midtersættet, flyt tilbage én set-bredde
+    if (marquee.scrollLeft >= w * 2) marquee.scrollLeft -= w;
+    // Hvis vi scroller forbi venstre kant, flyt frem én set-bredde
+    else if (marquee.scrollLeft <= 0) marquee.scrollLeft += w;
+  }
+
+  function prefersReducedMotion() {
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+
+  // Pause/resume ved interaktion
+  ['pointerdown','touchstart','mouseenter','focusin'].forEach(ev =>
+    marquee.addEventListener(ev, () => userActive = true, {passive:true})
+  );
+  ['pointerup','touchend','mouseleave','focusout'].forEach(ev =>
+    marquee.addEventListener(ev, () => userActive = false, {passive:true})
+  );
+
+  // Ved manuel scroll skal vi stadig wrappe
+  marquee.addEventListener('scroll', wrapIfNeeded, {passive:true});
+
+  requestAnimationFrame(autoScroll);
 });
 </script>
