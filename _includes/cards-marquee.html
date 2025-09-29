@@ -1,97 +1,31 @@
-<div class="marquee" id="marquee">
-  <div class="rail" id="rail">
-    <div class="set" id="set-a">
-      {% for card in site.data.cards.items %}
-        <div class="mcard">
-          <div class="mcard-media">
-            <img src="{{ card.image | relative_url }}" alt="{{ card.title }}">
-          </div>
-          <div class="mcard-body">
-            <div class="mcard-title">{{ card.title }}</div>
-            <div class="mcard-text">{{ card.text }}</div>
-          </div>
-          <a href="{{ card.link }}" target="_blank" rel="noopener" class="mcard-link"></a>
+<!-- Cards Marquee - SIMPLE VERSION -->
+<div class="cards-container">
+  <div class="cards-scroll">
+    {% for card in site.data.cards.items %}
+      <div class="card">
+        <div class="card-image">
+          <img src="{{ card.image | relative_url }}" alt="{{ card.title }}">
         </div>
-      {% endfor %}
-    </div>
+        <div class="card-content">
+          <h3 class="card-title">{{ card.title }}</h3>
+          <p class="card-text">{{ card.text }}</p>
+        </div>
+        <a href="{{ card.link }}" target="_blank" rel="noopener" class="card-link"></a>
+      </div>
+    {% endfor %}
+    
+    <!-- Duplicate for seamless loop -->
+    {% for card in site.data.cards.items %}
+      <div class="card">
+        <div class="card-image">
+          <img src="{{ card.image | relative_url }}" alt="{{ card.title }}">
+        </div>
+        <div class="card-content">
+          <h3 class="card-title">{{ card.title }}</h3>
+          <p class="card-text">{{ card.text }}</p>
+        </div>
+        <a href="{{ card.link }}" target="_blank" rel="noopener" class="card-link"></a>
+      </div>
+    {% endfor %}
   </div>
 </div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const marquee = document.getElementById('marquee');
-  const rail = document.getElementById('rail');
-  const setA = document.getElementById('set-a');
-
-  // Detekter platform
-  const IS_TOUCH = matchMedia('(pointer:coarse)').matches;
-  const IS_MOBILE = IS_TOUCH || window.innerWidth < 768;
-  const RRM = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // Klon A til to ekstra sæt = A B C
-  function ensureClones() {
-    const have = rail.querySelectorAll('.set').length;
-    for (let i = have; i < 3; i++) {
-      const clone = setA.cloneNode(true);
-      clone.setAttribute('aria-hidden','true');
-      rail.appendChild(clone);
-    }
-  }
-  ensureClones();
-
-  // Mål præcis bredde (inkl. margin) og center i midterste set (B)
-  function setWidth() { 
-    return Math.round(setA.getBoundingClientRect().width); 
-  }
-  function centerOnMiddle() { 
-    marquee.scrollLeft = setWidth(); 
-  }
-
-  addEventListener('load', () => { centerOnMiddle(); kick(); });
-
-  // Recalc ved resize / billeder loader (iOS kan ændre bredder sent)
-  const ro = new ResizeObserver(() => centerOnMiddle());
-  ro.observe(rail);
-
-  // Auto-scroll parametre
-  let userActive = false;
-  let last = 0;
-  // Sæt lavere hastighed:
-  let SPEED = 0.15; // px/ms (0.15 ≈ ~9px/s) – justér til dit ønskede tempo
-
-  function wrap() {
-    const w = setWidth();
-    const x = marquee.scrollLeft;
-    // Hold os inde i midterste set (B). Buffer = 0.5 set på hver side.
-    if (x < 0.5 * w)        marquee.scrollLeft = x + w; // scroll mod venstre -> hop frem
-    else if (x > 1.5 * w)   marquee.scrollLeft = x - w; // scroll mod højre  -> hop tilbage
-  }
-
-  function onInteraction(active) { userActive = active; }
-
-  ['pointerdown','touchstart','wheel','keydown','mouseenter','focusin']
-    .forEach(ev => marquee.addEventListener(ev, () => onInteraction(true), {passive:true}));
-  ['pointerup','touchend','mouseleave','focusout']
-    .forEach(ev => marquee.addEventListener(ev, () => onInteraction(false), {passive:true}));
-
-  marquee.addEventListener('scroll', wrap, {passive:true});
-
-  // Start auto kun på desktop uden reduced-motion
-  function kick() {
-    if (IS_MOBILE || RRM) return; // ingen auto på mobil
-    requestAnimationFrame(tick);
-  }
-
-  function tick(ts) {
-    if (!last) last = ts;
-    const dt = ts - last;
-    last = ts;
-
-    // Scroll **mod højre** i scrollLeft-koordinater ⇒ indhold bevæger sig **mod venstre**
-    if (!userActive) marquee.scrollLeft += SPEED * dt;
-
-    wrap();
-    requestAnimationFrame(tick);
-  }
-});
-</script>

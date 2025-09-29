@@ -281,33 +281,33 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
 }
 
 /* =========================
-   Cards Marquee - PERFECT ENDLESS SCROLL
+   Cards Marquee - SIMPLE & CLEAN
    ========================= */
-.marquee {
+.cards-container {
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior-x: contain;
-  scrollbar-width: none;
+  overflow-y: hidden;
   padding: 40px 0;
   width: 100%;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-.marquee::-webkit-scrollbar { 
-  display: none; 
+.cards-container::-webkit-scrollbar {
+  display: none;
 }
 
-.rail { 
-  display: inline-flex; 
+.cards-scroll {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  animation: scroll-left 30s linear infinite;
 }
 
-.set { 
-  display: inline-flex; 
+.cards-container:hover .cards-scroll {
+  animation-play-state: paused;
 }
 
-/* ingen gap/padding på .rail/.set */
-
-/* Card styling */
-.mcard {
+.card {
   flex: 0 0 340px;
   background: var(--card);
   border: 1px solid var(--border);
@@ -315,47 +315,31 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0,0,0,.08);
   position: relative;
-  transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all .3s ease;
   cursor: pointer;
-  margin-right: 16px;
 }
 
-.set .mcard:last-child {
-  margin-right: 0;
-}
-
-/* undgå reflow når billeder loader */
-.mcard-media img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
-
-.mcard:hover {
-  transform: translateY(-8px) scale(1.02);
+.card:hover {
+  transform: translateY(-8px);
   box-shadow: 0 12px 40px rgba(0,0,0,.15);
   border-color: var(--text);
 }
 
-.mcard:active {
-  transform: translateY(-4px) scale(0.98);
-}
-
-.mcard-media {
+.card-image {
   width: 100%;
   height: 200px;
   overflow: hidden;
   background: #111;
 }
 
-.mcard-media img {
+.card-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
 
-.mcard-link {
+.card-link {
   position: absolute;
   top: 0;
   left: 0;
@@ -364,39 +348,47 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
   z-index: 1;
 }
 
-.mcard-body {
-  padding: 12px 14px 14px;
+.card-content {
+  padding: 16px;
 }
 
-.mcard-title {
+.card-title {
   font-weight: 700;
   font-size: 16px;
-  margin: 2px 0 4px;
+  margin: 0 0 8px 0;
+  color: var(--text);
 }
 
-.mcard-text {
+.card-text {
   color: var(--muted);
   font-size: 14px;
+  margin: 0;
+  line-height: 1.4;
 }
 
-/* Responsive card sizes */
-@media (max-width: 1024px) {
-  .mcard {
-    flex: 0 0 300px;
-  }
+@keyframes scroll-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
+/* Mobile - no animation, manual scroll only */
 @media (max-width: 768px) {
-  .marquee {
-    padding: 20px 0;
+  .cards-scroll {
+    animation: none;
+    gap: 12px;
   }
-  .mcard {
+  
+  .card {
     flex: 0 0 280px;
+  }
+  
+  .cards-container {
+    padding: 20px 0;
   }
 }
 
 @media (max-width: 480px) {
-  .mcard {
+  .card {
     flex: 0 0 260px;
   }
 }
