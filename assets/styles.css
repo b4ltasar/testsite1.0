@@ -281,7 +281,7 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
 }
 
 /* =========================
-   Cards Marquee - FIXED VERSION
+   Cards Marquee - COMPLETELY FIXED
    ========================= */
 .cards-marquee {
   position: relative;
@@ -293,7 +293,7 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
 
 .cards-track {
   display: flex;
-  gap: 0; /* NO GAP - this is crucial for seamless loop */
+  gap: 16px; /* GAP between cards */
   width: max-content;
   padding: 10px 0;
   animation: cards-marquee 40s linear infinite;
@@ -315,11 +315,6 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
   position: relative;
   transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
-  margin-right: 16px; /* Add margin to the right instead of gap */
-}
-
-.mcard:last-child {
-  margin-right: 0; /* NO MARGIN on last card of each set */
 }
 
 .mcard:hover {
@@ -376,11 +371,18 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
   to { transform: translateX(-50%); }
 }
 
-/* Mobile responsiveness */
-@media (max-width: 1024px) {
+/* Desktop - Auto scroll */
+@media (min-width: 769px) {
   .cards-marquee {
     overflow-x: hidden;
   }
+  .cards-track {
+    animation: cards-marquee 40s linear infinite;
+  }
+}
+
+/* Tablet - Auto scroll faster */
+@media (max-width: 1024px) and (min-width: 769px) {
   .cards-track {
     animation: cards-marquee 30s linear infinite;
   }
@@ -389,6 +391,7 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
   }
 }
 
+/* Mobile - Manual scroll */
 @media (max-width: 768px) {
   .cards-marquee {
     overflow-x: auto;
@@ -400,12 +403,11 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
   
   .cards-track {
     animation: none;
-    gap: 16px;
+    gap: 12px;
   }
   
   .mcard {
     flex: 0 0 280px;
-    margin-right: 0;
   }
   
   .cards-marquee::-webkit-scrollbar {
