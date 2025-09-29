@@ -281,51 +281,50 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
 }
 
 /* =========================
-   Cards marquee
+   Cards Marquee - FIXED VERSION
    ========================= */
-.cards-marquee{ 
-  position:relative; 
-  overflow-x: auto; 
-  overflow-y: hidden; 
-  padding:40px 0; 
-  scrollbar-width: thin;
-  scrollbar-color: var(--text) var(--border);
+.cards-marquee {
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  padding: 40px 0;
+  width: 100%;
 }
-.cards-marquee::-webkit-scrollbar { height: 6px; }
-.cards-marquee::-webkit-scrollbar-track { background: var(--border); border-radius: 3px; }
-.cards-marquee::-webkit-scrollbar-thumb { background: var(--text); border-radius: 3px; }
-.cards-marquee::-webkit-scrollbar-thumb:hover { background: var(--muted); }
 
-.cards-track{ 
-  display:flex; 
-  will-change:transform; 
-  animation:cards-marquee 40s linear infinite;
+.cards-track {
+  display: flex;
+  gap: 0; /* NO GAP - this is crucial for seamless loop */
   width: max-content;
-}
-.cards-marquee:hover .cards-track{ animation-play-state:paused; }
-.cards-track.paused{ animation-play-state:paused; }
-
-.set{ 
-  display:flex; 
-  gap: 16px;
+  padding: 10px 0;
+  animation: cards-marquee 40s linear infinite;
+  will-change: transform;
 }
 
-/* Cards styling */
-.set .mcard{
-  flex: 0 0 340px; 
-  background:var(--card); 
-  border:1px solid var(--border);
-  border-radius:16px; 
-  overflow:hidden; 
-  box-shadow:0 4px 20px rgba(0,0,0,.08);
+.cards-marquee:hover .cards-track {
+  animation-play-state: paused;
+}
+
+/* Card styling */
+.mcard {
+  flex: 0 0 340px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,.08);
   position: relative;
   transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
+  margin-right: 16px; /* Add margin to the right instead of gap */
+}
+
+.mcard:last-child {
+  margin-right: 0; /* NO MARGIN on last card of each set */
 }
 
 .mcard:hover {
   transform: translateY(-8px) scale(1.02);
-  box-shadow:0 12px 40px rgba(0,0,0,.15);
+  box-shadow: 0 12px 40px rgba(0,0,0,.15);
   border-color: var(--text);
 }
 
@@ -333,19 +332,21 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
   transform: translateY(-4px) scale(0.98);
 }
 
-.mcard-media{ 
+.mcard-media {
   width: 100%;
   height: 200px;
   overflow: hidden;
   background: #111;
 }
-.mcard-media img{ 
+
+.mcard-media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
-.mcard-link{
+
+.mcard-link {
   position: absolute;
   top: 0;
   left: 0;
@@ -353,32 +354,78 @@ html[data-theme="dark"]  .drawer-panel{ background:#111; }
   bottom: 0;
   z-index: 1;
 }
-.mcard-body{ padding:12px 14px 14px; }
-.mcard-title{ font-weight:700; font-size:16px; margin:2px 0 4px; }
-.mcard-text{ color:var(--muted); font-size:14px; }
 
-/* Auto-scroll animation */
-@keyframes cards-marquee{ 
+.mcard-body {
+  padding: 12px 14px 14px;
+}
+
+.mcard-title {
+  font-weight: 700;
+  font-size: 16px;
+  margin: 2px 0 4px;
+}
+
+.mcard-text {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* Animation - moves exactly 50% to create seamless loop */
+@keyframes cards-marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
 
-/* Mobile responsive */
-@media (max-width: 768px) {
-  .set .mcard{
-    flex: 0 0 280px;
+/* Mobile responsiveness */
+@media (max-width: 1024px) {
+  .cards-marquee {
+    overflow-x: hidden;
   }
-  .set {
-    gap: 12px;
+  .cards-track {
+    animation: cards-marquee 30s linear infinite;
+  }
+  .mcard {
+    flex: 0 0 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cards-marquee {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 20px 0;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+  
+  .cards-track {
+    animation: none;
+    gap: 16px;
+  }
+  
+  .mcard {
+    flex: 0 0 280px;
+    margin-right: 0;
+  }
+  
+  .cards-marquee::-webkit-scrollbar {
+    height: 4px;
+  }
+  
+  .cards-marquee::-webkit-scrollbar-track {
+    background: var(--border);
+    border-radius: 2px;
+  }
+  
+  .cards-marquee::-webkit-scrollbar-thumb {
+    background: var(--text);
+    border-radius: 2px;
   }
 }
 
 @media (max-width: 480px) {
-  .set .mcard{
-    flex: 0 0 250px;
-  }
-  .set {
-    gap: 10px;
+  .mcard {
+    flex: 0 0 260px;
   }
 }
 
